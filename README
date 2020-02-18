@@ -12,3 +12,5 @@ create database thesis;
 exit
 cd extra
 mysql -u root -p thesis < dump.sql
+cd ../webserver
+php -S localhost:8080 
