@@ -1,1 +1,8 @@
-
+```
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew install mysql
+brew tap homebrew/services
+brew cask install sequel-pro
+brew services start mysql
+mysqladmin -u root password 'thesis'
+```
