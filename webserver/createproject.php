@@ -32,7 +32,7 @@
 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
-    <a href="index.php"> <img src="skat-logo.png" alt="SKAT" style="height:75px;"> </a> <br/><br/><br/>
+    <a href="index.php"> <img src="logo.png" alt="Logo" style="height:75px;"> </a> <br/><br/><br/>
     <br />
     <div class="container">
       <h1>Opret projekt </h1>

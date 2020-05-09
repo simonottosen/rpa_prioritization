@@ -19,9 +19,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.js"></script>
-    <link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.css" rel="stylesheet"/>
-
 
 <?php
 $servername = "127.0.0.1";
@@ -59,8 +56,9 @@ $result = $conn->query($sql);
     <!--  <a href="index.html" download class="btn btn-info" role="button">Download kildekoden</a> -->
 
       <div class="container">
-<br/>
-        <a href="../frontpage.php"> <img src="../skat-logo.png" alt="SKAT" style="height:75px;"> </a>
+        <br/>
+
+        <a href="../frontpage.php"> <img src="../logo.png" alt="Logo" style="height:75px;"> </a>
         <hr>
 
         <h4>Vælg det projekt i listen, som du ønsker at redigere</h4>
@@ -75,7 +73,7 @@ $result = $conn->query($sql);
 
 
 
-<table class="table table-striped table-bordered" >
+<table class="table table-striped table-bordered">
   <br/>
   <hr/>
 
@@ -95,9 +93,9 @@ if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
 
       $value = '';
-      $evaldev = $row['evaldev'];
+      $evalpro = $row['evalpro'];
 
-      if ($evaldev == 1){
+      if ($evalpro == 1){
         $evalval = 'Ja';
       } else {
         $evalval = 'Nej';
@@ -110,7 +108,7 @@ if ($result->num_rows > 0) {
       <td>'.$row['descr'].'</td>
       <td>'.$evalval.'</td>
       <td>'.$row['evalself'].'</td>
-      <td>'.$row['scoredev'].'</td>
+      <td>'.$row['scorepro'].'</td>
 
     </tr>';
 }

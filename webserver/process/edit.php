@@ -1,6 +1,5 @@
 <?php
    include('../session.php');
-
 ?>
 <html lang="en">
   <head>
@@ -25,9 +24,6 @@ function myFunction() {
       window.location.reload(false);
 }
 </script>
-
-
-
 
 <?php
 $servername = "127.0.0.1";
@@ -72,10 +68,11 @@ while($row = $result->fetch_assoc()) {
   $scoredev = $row['scoredev'];
   $scorepro = $row['scorepro'];
   $scorelev = $row['scorelev'];
+  $dok1 = $row['dok1'];
+  $dok2 = $row['dok2'];
+  $dok3 = $row['dok3'];
+  $dok4 = $row['dok4'];
   $score = $row['score'];
-  $aarsvcost = $row['aarsvcost'];
-
-
   }
 
   $conn->close();
@@ -114,7 +111,7 @@ while($row = $result->fetch_assoc()) {
       <div class="container">
         <br/>
 
-        <a href="../frontpage.php"> <img src="../skat-logo.png" alt="SKAT" style="height:75px;"> </a>
+        <a href="../frontpage.php"> <img src="../logo.png" alt="Logo" style="height:75px;"> </a>
         <hr>
 
         <h2> <?php echo $name ?> </h2>
@@ -124,25 +121,35 @@ while($row = $result->fetch_assoc()) {
           De har givet deres egenvurdering karakteren <?php echo $evalself ?> med følgende begrundelse </b>
           <p> "<?php echo $evaldesc ?>" </p>
 
+          <hr/>
+
+          <b>Stilleren har derudover svaret følgende til dokumentationen</b>
+          <p> Er der dokumentation af processen? <?php echo $dok1 ?> </p>
+          <p> Er dokumentationen opdateret til at reflektere den nuværende process helt? <?php echo $dok2 ?> </p>
+          <p> Er dokumentationen digital? <?php echo $dok3 ?> </p>
+          <p> Indeholder dokumentationen skærmbilleder af alle delprocesser? <?php echo $dok4 ?>  </p>
+          <hr/>
+
+
+
 
       </div>
     </div>
 
     <div class="container">
       <div class="col-md-8 order-md-1">
-        <h4 class="mb-3">Vurdering fra udvikleren</h4>
+        <h4 class="mb-3">Vurdering fra processkonsulenten</h4>
           </div>
           <hr class="mb-4">
           <form method = "post" action = "<?php $_PHP_SELF ?>">
-          <p>Datatilgængelighed</p><div class="input-group" style='margin-top: 10px;'>
-          </div>
-          <input name = "Scr1" id='Scr1' type="number" min="0" max="10" step="1" class="form-control formBlock" name="Scr1"  value="<?php echo $var1dev ?>" onkeyup="this.value = minmax(this.value, 0, 10)" style="width:200px;"/>
-          <hr/><p>Mulighed for genbrug af kode </p>
-          <input name = "Scr2" id='Scr2' type="number" min="0" max="10" step="1" class="form-control formBlock" name="Scr2"  value="<?php echo $var2dev ?>" onkeyup="this.value = minmax(this.value, 0, 10)" style="width:200px;"/>
-          <hr/><p>Mulighed for brug af byggeklodser</p>
-          <input name = "Scr3" id='Scr3' type="number" min="0" max="10" step="1" class="form-control formBlock" name="Scr3"  value="<?php echo $var3dev ?>" onkeyup="this.value = minmax(this.value, 0, 10)" style="width:200px;"/>
-          <hr/><p>Vurdering af kompleksiteten. 10 er en lav kompleksitet.</p>
-          <input name = "Scr4" id='Scr4' type="number" min="0" max="10" step="1" class="form-control formBlock" name="Scr4"  value="<?php echo $var4dev ?>" onkeyup="this.value = minmax(this.value, 0, 10)" style="width:200px;"/>
+          <p>Skærmbilleder i brug</p>
+          <input name = "Scr1" id='Scr1' type="number" min="0" max="10" step="1" class="form-control formBlock" name="Scr1"  value="<?php echo $var1pro ?>" onkeyup="this.value = minmax(this.value, 0, 10)"style="width:200px;"/>
+          <hr/><p>Systemer der bliver interageret med</p>
+          <input name = "Scr2" id='Scr2' type="number" min="0" max="10" step="1" class="form-control formBlock" name="Scr2"  value="<?php echo $var2pro ?>" onkeyup="this.value = minmax(this.value, 0, 10)"style="width:200px;"/>
+          <hr/><p>Kvalitet af nuværende dokumentation af processen(PDD o.lign)</p>
+          <input name = "Scr3" id='Scr3' type="number" min="0" max="10" step="1" class="form-control formBlock" name="Scr3"  value="<?php echo $var3pro ?>" onkeyup="this.value = minmax(this.value, 0, 10)"style="width:200px;"/>
+          <hr/><p>Forbedring af Kundetilfredshed</p>
+          <input name = "Scr4" id='Scr4' type="number" min="0" max="10" step="1" class="form-control formBlock" name="Scr4"  value="<?php echo $var4pro ?>" onkeyup="this.value = minmax(this.value, 0, 10)"style="width:200px;"/>
 
           <br/>
       <button class="btn btn-success" name = "update" type = "submit" id = "update">Opdater værdierne</button>
@@ -150,7 +157,7 @@ while($row = $result->fetch_assoc()) {
       </p>
       <hr/>
       <h2>Resultat</h2>
-      <h2 class="card-title pricing-card-title"> <span id="UdrTot" ></span><small class="text-muted">/ 10</small></h2>
+      <h2 class="card-title pricing-card-title"> <span id="UdrTot"></span><small class="text-muted">/ 10</small></h2>
       <hr/>
       <br/>
     </div>
@@ -178,15 +185,15 @@ while($row = $result->fetch_assoc()) {
         $Scr4 = $_POST['Scr4'];
         $UdrTot = $_POST['UdrTot'];
 
-        $Par1 = 0.25;
-        $Par2 = 0.15;
-        $Par3 = 0.20;
-        $Par4 = 0.40;
+        $Par1 = 0.20;
+        $Par2 = 0.20;
+        $Par3 = 0.10;
+        $Par4 = 0.50;
 
 
         $UdrTot = ($Scr1 * $Par1 + $Scr2 * $Par2 + $Scr3 * $Par3 + $Scr4 * $Par4);
 
-        $sql = "UPDATE projects ". "SET `var1dev` = $Scr1, `var2dev` = $Scr2, `var3dev` = $Scr3, `var4dev` = $Scr4, `aarsvcost` = $Scr5, `scoredev` = $UdrTot,  `evaldev` = 1 ". "WHERE id = $databaseselection";
+        $sql = "UPDATE projects ". "SET `var1pro` = $Scr1, `var2pro` = $Scr2, `var3pro` = $Scr3, `var4pro` = $Scr4, `scorepro` = $UdrTot,  `evaldev` = 1 ". "WHERE id = $databaseselection";
         //$sql = "UPDATE projects ". "SET var8 = $Scr8 ". "WHERE id = $databaseselection";
 
         $result = $conn->query($sql);
@@ -194,12 +201,13 @@ while($row = $result->fetch_assoc()) {
 
         $conn->close();
         echo '<script type="text/javascript">',
-             'myFunction();',
+             'setTimeout(myFunction(), 3000);',
              '</script>'
         ;}
         ?>
 
       </div>
+
       <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
@@ -224,12 +232,12 @@ while($row = $result->fetch_assoc()) {
               Antal skærmbilleder <b><span id="Par5"></span>%</b><br/>
               Antal berørte systemer <b><span id="Par6"></span>%</b><br/>
               Kvalitet <b><span id="Par7"></span>%</b><br/>
-              Kundetilfredshed <b><span id="Par8"></span>%</b><br/>
+              FTE Besparelser <b><span id="Par8"></span>%</b><br/>
 
   <hr/>
               <b> Vægtning af leverancekoordinator </b><br/>
               Risikovurdering <b><span id="Par9"></span>%</b><br/>
-              FTE Besparelser <b><span id="Par10"></span>%</b><br/>
+              Kundetilfredshed <b><span id="Par10"></span>%</b><br/>
               Vision <b><span id="Par11"></span>%</b><br/>
 
 
@@ -258,7 +266,7 @@ while($row = $result->fetch_assoc()) {
   var Par10 = 0.50;
   var Par11 = 0.25;
 
-
+  
   $('#Par1').html(Par1 * 100);
   $('#Par2').html(Par2 * 100);
   $('#Par3').html(Par3 * 100);
@@ -271,56 +279,51 @@ while($row = $result->fetch_assoc()) {
   $('#Par10').html(Par10 * 100);
   $('#Par11').html(Par11 * 100);
 
+
     </script>
 
-      <script>
-      function minmax(value, min, max)
-      {
-          if(parseInt(value) < min || isNaN(parseInt(value)))
-              return 0;
-          else if(parseInt(value) > max)
-              return 10;
-          else return value;
-      }
-      </script>
-
-      <script>
-
-      //Her definerer vi de variabler som skal bruges til udregningen og ikke bør ændres på
-      $('input').keyup(function(){
-      //Samlet pointscore = 1
-
-      var Scr1 = Number($('#Scr1').val());
-      var Scr2 = Number($('#Scr2').val());
-      var Scr3 = Number($('#Scr3').val());
-      var Scr4 = Number($('#Scr4').val());
+    <script>
+    function minmax(value, min, max)
+    {
+        if(parseInt(value) < min || isNaN(parseInt(value)))
+            return 0;
+        else if(parseInt(value) > max)
+            return 10;
+        else return value;
+    }
 
 
-      var Udr1 = Par1 * Scr1
-      var Udr2 = Par2 * Scr2
-      var Udr3 = Par3 * Scr3
-      var Udr4 = Par4 * Scr4
-      var UdrTot = (Udr1 + Udr2 + Udr3 + Udr4)
+    //Her definerer vi de variabler som skal bruges til udregningen og ikke bør ændres på
+    $('input').keyup(function(){
+
+    var Scr1 = Number($('#Scr1').val());
+    var Scr2 = Number($('#Scr2').val());
+    var Scr3 = Number($('#Scr3').val());
+    var Scr4 = Number($('#Scr4').val());
 
 
-        //Dette er vores inputs som er taget fra de inputs der kan indtasts på siden. De bliver så defineret som variabler vi kan bruge i logikken senere i koden
-        var UdrTot = UdrTot.toFixed(1)
+    var Udr1 = Par1 * Scr1
+    var Udr2 = Par2 * Scr2
+    var Udr3 = Par3 * Scr3
+    var Udr4 = Par4 * Scr4
+
+    var UdrTot = (Udr1 + Udr2 + Udr3 + Udr4)
+
+
+      //Dette er vores inputs som er taget fra de inputs der kan indtasts på siden. De bliver så defineret som variabler vi kan bruge i logikken senere i koden
+      var UdrTot = UdrTot.toFixed(1)
 
 
 
-        $('#UdrTot').html(UdrTot);
-        $('#select').html(select);
+      $('#UdrTot').html(UdrTot);
+      $('#select').html(select);
 
 
+    })
+    window.onload = function() {
+    $('input').keyup()
+    };
 
-
-      })
-      window.onload = function() {
-      $('input').keyup()
-      };
-
-      </script>
-
-
+    </script>
   </body>
 </html>

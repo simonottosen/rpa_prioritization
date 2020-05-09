@@ -58,7 +58,7 @@ $result = $conn->query($sql);
       <div class="container">
         <br/>
 
-        <a href="../frontpage.php"> <img src="../skat-logo.png" alt="SKAT" style="height:75px;"> </a>
+        <a href="../frontpage.php"> <img src="../logo.png" alt="Logo" style="height:75px;"> </a>
         <hr>
 
         <h4>Vælg det projekt i listen, som du ønsker at redigere</h4>

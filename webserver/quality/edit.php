@@ -4,14 +4,14 @@
 <html lang="en">
   <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115740420-2"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115740420-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-      gtag('config', 'UA-115740420-2');
-    </script>
+  gtag('config', 'UA-115740420-2');
+</script>
 
 
     <meta charset="utf-8">
@@ -68,14 +68,11 @@ while($row = $result->fetch_assoc()) {
   $scoredev = $row['scoredev'];
   $scorepro = $row['scorepro'];
   $scorelev = $row['scorelev'];
-  $score = $row['score'];
   $dok1 = $row['dok1'];
   $dok2 = $row['dok2'];
   $dok3 = $row['dok3'];
   $dok4 = $row['dok4'];
-  $aarsvbesp = $row['aarsvbesp'];
-
-
+  $score = $row['score'];
   }
 
   $conn->close();
@@ -114,7 +111,7 @@ while($row = $result->fetch_assoc()) {
       <div class="container">
         <br/>
 
-        <a href="../frontpage.php"> <img src="../skat-logo.png" alt="SKAT" style="height:75px;"> </a>
+        <a href="../frontpage.php"> <img src="../logo.png" alt="Logo" style="height:75px;"> </a>
         <hr>
 
         <h2> <?php echo $name ?> </h2>
@@ -124,22 +121,36 @@ while($row = $result->fetch_assoc()) {
           De har givet deres egenvurdering karakteren <?php echo $evalself ?> med følgende begrundelse </b>
           <p> "<?php echo $evaldesc ?>" </p>
 
+          <hr/>
+
+          <b>Stilleren har derudover svaret følgende til dokumentationen</b>
+          <p> Er der dokumentation af processen? <?php echo $dok1 ?> </p>
+          <p> Er dokumentationen opdateret til at reflektere den nuværende process helt? <?php echo $dok2 ?> </p>
+          <p> Er dokumentationen digital? <?php echo $dok3 ?> </p>
+          <p> Indeholder dokumentationen skærmbilleder af alle delprocesser? <?php echo $dok4 ?>  </p>
+          <hr/>
+
+
+
 
       </div>
     </div>
 
     <div class="container">
       <div class="col-md-8 order-md-1">
-        <h4 class="mb-3">Vurdering fra leverancekoordinatoren</h4>
+        <h4 class="mb-3">Vurdering fra processkonsulenten</h4>
           </div>
           <hr class="mb-4">
           <form method = "post" action = "<?php $_PHP_SELF ?>">
-          <p>Informationssikkerhed. 10 er god sikkerhed.</p>
-          <input name = "Scr1" id='Scr1' type="number" min="0" max="10" step="1" class="form-control formBlock" name="Scr1"  value="<?php echo $var1lev ?>" onkeyup="this.value = minmax(this.value, 0, 10)"style="width:200px;"/>
-          <hr/><p>Besparelser målt i antallet af FTEer. 10 er en høj besparelse.</p>
-          <input name = "Scr2" id='Scr2' type="number" min="0" max="10" step="1" class="form-control formBlock" name="Scr2"  value="<?php echo $var2lev ?>" onkeyup="this.value = minmax(this.value, 0, 10)"style="width:200px;"/>
-          <hr/><p>Overensstemmelse med samlet vision </p>
-          <input name = "Scr3" id='Scr3' type="number" min="0" max="10" step="1" class="form-control formBlock" name="Scr3"  value="<?php echo $var3lev ?>" onkeyup="this.value = minmax(this.value, 0, 10)"style="width:200px;"/>
+          <p>Skærmbilleder i brug</p>
+          <input name = "Scr1" id='Scr1' type="number" min="0" max="10" step="1" class="form-control formBlock" name="Scr1"  value="<?php echo $var1pro ?>" onkeyup="this.value = minmax(this.value, 0, 10)"style="width:200px;"/>
+          <hr/><p>Systemer der bliver interageret med</p>
+          <input name = "Scr2" id='Scr2' type="number" min="0" max="10" step="1" class="form-control formBlock" name="Scr2"  value="<?php echo $var2pro ?>" onkeyup="this.value = minmax(this.value, 0, 10)"style="width:200px;"/>
+          <hr/><p>Kvalitet af nuværende dokumentation af processen(PDD o.lign)</p>
+          <input name = "Scr3" id='Scr3' type="number" min="0" max="10" step="1" class="form-control formBlock" name="Scr3"  value="<?php echo $var3pro ?>" onkeyup="this.value = minmax(this.value, 0, 10)"style="width:200px;"/>
+          <hr/><p>Forbedring af Kundetilfredshed</p>
+          <input name = "Scr4" id='Scr4' type="number" min="0" max="10" step="1" class="form-control formBlock" name="Scr4"  value="<?php echo $var4pro ?>" onkeyup="this.value = minmax(this.value, 0, 10)"style="width:200px;"/>
+
           <br/>
       <button class="btn btn-success" name = "update" type = "submit" id = "update">Opdater værdierne</button>
         </form>
@@ -171,17 +182,19 @@ while($row = $result->fetch_assoc()) {
         $Scr1 = $_POST['Scr1'];
         $Scr2 = $_POST['Scr2'];
         $Scr3 = $_POST['Scr3'];
+        $Scr4 = $_POST['Scr4'];
+        $UdrTot = $_POST['UdrTot'];
+
+        $Par1 = 0.20;
+        $Par2 = 0.20;
+        $Par3 = 0.10;
+        $Par4 = 0.50;
 
 
-        $Par1 = 0.25;
-        $Par2 = 0.5;
-        $Par3 = 0.25;
+        $UdrTot = ($Scr1 * $Par1 + $Scr2 * $Par2 + $Scr3 * $Par3 + $Scr4 * $Par4);
 
-
-        $UdrTot = ($Scr1 * $Par1 + $Scr2 * $Par2 + $Scr3 * $Par3);
-
-        $sql = "UPDATE projects ". "SET `var1lev` = $Scr1, `var2lev` = $Scr2, `var3lev` = $Scr3, `aarsvbesp` = $Scr4, `scorelev` = $UdrTot, `evallev` = 1 ". "WHERE id = $databaseselection";
-        //$sql = "UPDATE projects ". "SET var2lev = $Scr2 ". "WHERE id = $databaseselection";
+        $sql = "UPDATE projects ". "SET `var1pro` = $Scr1, `var2pro` = $Scr2, `var3pro` = $Scr3, `var4pro` = $Scr4, `scorepro` = $UdrTot,  `evaldev` = 1 ". "WHERE id = $databaseselection";
+        //$sql = "UPDATE projects ". "SET var8 = $Scr8 ". "WHERE id = $databaseselection";
 
         $result = $conn->query($sql);
 
@@ -194,6 +207,7 @@ while($row = $result->fetch_assoc()) {
         ?>
 
       </div>
+
       <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
@@ -252,7 +266,7 @@ while($row = $result->fetch_assoc()) {
   var Par10 = 0.50;
   var Par11 = 0.25;
 
-
+  
   $('#Par1').html(Par1 * 100);
   $('#Par2').html(Par2 * 100);
   $('#Par3').html(Par3 * 100);
@@ -268,8 +282,6 @@ while($row = $result->fetch_assoc()) {
 
     </script>
 
-
-
     <script>
     function minmax(value, min, max)
     {
@@ -281,30 +293,30 @@ while($row = $result->fetch_assoc()) {
     }
 
 
-
-
     //Her definerer vi de variabler som skal bruges til udregningen og ikke bør ændres på
     $('input').keyup(function(){
-    //Samlet pointscore = 1
 
     var Scr1 = Number($('#Scr1').val());
     var Scr2 = Number($('#Scr2').val());
     var Scr3 = Number($('#Scr3').val());
+    var Scr4 = Number($('#Scr4').val());
 
-    var Udr1 = Par7 * Scr1
-    var Udr2 = Par8 * Scr2
-    var Udr3 = Par9 * Scr3
-    var UdrTot = (Udr1 + Udr2 + Udr3)
+
+    var Udr1 = Par1 * Scr1
+    var Udr2 = Par2 * Scr2
+    var Udr3 = Par3 * Scr3
+    var Udr4 = Par4 * Scr4
+
+    var UdrTot = (Udr1 + Udr2 + Udr3 + Udr4)
 
 
       //Dette er vores inputs som er taget fra de inputs der kan indtasts på siden. De bliver så defineret som variabler vi kan bruge i logikken senere i koden
-      var UdrTot = UdrTot.toFixed(1).replace(".", ",")
+      var UdrTot = UdrTot.toFixed(1)
+
 
 
       $('#UdrTot').html(UdrTot);
       $('#select').html(select);
-
-
 
 
     })

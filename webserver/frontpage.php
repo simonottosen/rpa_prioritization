@@ -57,12 +57,12 @@
 
 
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-      <a href="frontpage.php"> <img src="skat-logo.png" alt="SKAT" style="height:75px;"> </a>
+      <a href="frontpage.php"> <img src="logo.png" alt="LOGO" style="height:75px;"> </a>
       <br/>
       <br/>
       <br/>
 
-      <p class="lead">Vælg venligst herunder hvilken stilling du tilhører og derfor vil lave ændringer ud fra.<br/> Hvis du sidder til fredags-møde, så vælg venligst administrator menuen, da du her kan redigere i alle værdier.</p>
+      <p class="lead">A computerized decision support system for Robotic Process Automation.</p>
 
 
 
@@ -75,84 +75,90 @@
       <div class="card-deck mb-3 text-center">
         <div class="card mb-4 box-shadow">
           <div class="card-header">
-            <h4 class="my-0 font-weight-normal">Udvikler</h4>
+            <h4 class="my-0 font-weight-normal">Developer</h4>
           </div>
           <div class="card-body">
             <ul class="list-unstyled mt-3 mb-4">
-              <li data-toggle="tooltip" data-placement="right" title="Ved datatilgængelighed menes der hvor let det er at få adgang til data f.eks over et API."> Datatilgængelighed</li>
-              <li data-toggle="tooltip" data-placement="right" title="Ved genbrug menes der 'uofficiel' genbrug, hvor man bruger kode som ikke er en i byggeklods."> Genbrug af kode</li>
-              <li data-toggle="tooltip" data-placement="right" title="Ved byggeklods menes der brug af en officiel vedligeholdt byggeklods."> Byggeklodser</li>
-              <li data-toggle="tooltip"  data-placement="right" title="Ved kompleksitet menes der hvor svært og stor robotten er at lave.">Kompleksitet</li>
-
+              <li>Reusable Modules</li>
+              <li>Workload</li>
+              <li>Clicks and Interactions</li>
             </ul>
-            <a href="udvikler/select.php" style="text-decoration:none;"> <type="button" class="btn btn-lg btn-block btn-outline-primary">Rediger Pipeline</a>
+            <br>
+            <br>
+
+            <a href="developer/select.php" style="text-decoration:none;"> <type="button" class="btn btn-lg btn-block btn-outline-primary">Rate projects</a>
           </div>
         </div>
 
 
         <div class="card mb-4 box-shadow">
           <div class="card-header">
-            <h4 class="my-0 font-weight-normal">Proceskonsulent</h4>
+            <h4 class="my-0 font-weight-normal">Processconsultant</h4>
           </div>
           <div class="card-body">
             <ul class="list-unstyled mt-3 mb-4">
-              <li data-toggle="tooltip"  data-placement="right" title="Med dette menes antallet af skærmbilleder der bliver vist under processen.">Antal skærmbilleder</li>
-              <li data-toggle="tooltip"  data-placement="right" title="Antallet af systemer som interageres med af robotten.">Antal berørte systemer</li>
-              <li data-toggle="tooltip"  data-placement="right" title="Kvaliteten af den nuværende procesbeskrivelse og anden relevant dokumentation.">Kvalitet af PDD</li>
-              <li data-toggle="tooltip"  data-placement="right" title="Vurdering af hvor mange mennesker der kan spares.">Kundetilfredshed</li>
+              <li>Process Maturity</li>
+              <li>Time Usage</li>
+              <li>Amount of Transactions</li>
+              <li>System complexity</li>
+              <li>System count</li>
+
             </ul>
-            <a href="processkonsulent/select.php" style="text-decoration:none;"> <type="button" class="btn btn-lg btn-block btn-outline-primary">Rediger Pipeline</a>
+            <a href="process/select.php" style="text-decoration:none;"> <type="button" class="btn btn-lg btn-block btn-outline-primary">Rate projects</a>
+          </div>
+        </div>
+
+        <div class="card mb-4 box-shadow">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Quality & Risk</h4>
+          </div>
+          <div class="card-body">
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>Risk-evaluation</li>
+              <li>Documentation Quality</li>
+              <li>Customer Satisfaction</li>
+            </ul>
+            <br>
+            <br>
+
+            <a href="quality/select.php" style="text-decoration:none;"> <type="button" class="btn btn-lg btn-block btn-outline-primary">Rate projects</a>
           </div>
         </div>
 
 
+
         <div class="card mb-4 box-shadow">
           <div class="card-header">
-            <h4 class="my-0 font-weight-normal">Leverancekoordinator</h4>
+            <h4 class="my-0 font-weight-normal">Leader</h4>
           </div>
           <div class="card-body">
             <ul class="list-unstyled mt-3 mb-4">
-              <li data-toggle="tooltip"  data-placement="right" title="Vurdering af risikoen ved robotten. Mulighed for at inkludere ekspertbedømmelser.">Risikovurdering</li>
-              <li data-toggle="tooltip"  data-placement="right" title="Forbedring af kundetilfredsheden ved brug af en robot.">FTE Besparelser</li>
-              <li data-toggle="tooltip"  data-placement="right" title="I hvor stor grad dette projekt stemmer overens med SKATs overordnede vision.">Vision</li>
-              <br/>
+              <li>Legislation pressure</li>
+              <li>Internal Prioritization</li>
+              <li>Organisational Vision</li>
             </ul>
-            <a href="leverancekoordinator/select.php" style="text-decoration:none;"> <type="button" class="btn btn-lg btn-block btn-outline-primary">Rediger Pipeline</a>
+            <br>
+            <br>
+
+            <a href="leader/select.php" style="text-decoration:none;"> <type="button" class="btn btn-lg btn-block btn-outline-primary">Rate projects</a>
           </div>
         </div>
       </div>
 <hr/>
 <br/>
 
-    <div class="card-deck mb-2 text-center" style="max-width: 80rem;">
-        <div class="card">
-          <div class="card-header">
-            <h4 class="my-0 font-weight-normal" style="text-align:center">Administrator</h4>
-          </div>
-          <div class="card-body">
-            <ul class="list-unstyled mt-3 mb-4" style="text-align:center;">
-              <li>Udvikler</li>
-              <li>Proceskonsulent</li>
-              <li>Leverancekoordinator</li>
-              <br/>
-            </ul>
-            <a href="admin/select.php" style="text-decoration:none;"> <type="button" class="btn btn-lg btn-block btn-primary">Rediger Pipeline</a>
-          </div>
-        </div>
 
         <div class="card">
 
           <div class="card-header">
-            <h4 class="my-0 font-weight-normal" style="text-align:center">Liste over alle projekter</h4>
+            <h4 class="my-0 font-weight-normal" style="text-align:center">Prioritzationboard</h4>
           </div>
           <div class="card-body">
             <ul class="list-unstyled mt-3 mb-4" style="text-align:center;">
-              <li>En liste over alle projekter </li>
-              <li>Alle gamle og nye projekter er inkluderet</li>
-              <li>Ingen mulighed for at redigere </li>
+              <li>Click this to see the completed rating of all projects.</li>
               <br/>
             </ul>
-            <a href="list.php" style="text-decoration:none;"> <type="button" class="btn btn-lg btn-block btn-primary">Se listen</a>
+            <a href="list.php" style="text-decoration:none;"> <type="button" class="btn btn-lg btn-block btn-primary">Prioritized List</a>
           </div>
         </div>
 

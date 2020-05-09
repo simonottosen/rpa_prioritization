@@ -53,7 +53,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
   <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post" class="form-signin" style="width:300px;">
-    <a href="index.php"> <img src="skat-logo.png" alt="SKAT" style="height:63px;"> </a> <br/><br/><br/>
+    <a href="index.php"> <img src="logo.png" alt="Logo" style="height:63px;"> </a> <br/><br/><br/>
   	<input type="text" name="myusername" value="" placeholder="Username" class = "form-control">
   	<input type="password" name="mypassword" value="" placeholder="Password" class = "form-control">
   	<button type="submit" name="submit" class="btn btn-lg btn-primary btn-block">Log ind</button>
