@@ -11,7 +11,10 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
-
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+<link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
 
 
@@ -26,7 +29,7 @@
     </script>
 
 
-<title>SKAT - Beslutningsprocess</title>
+<title>Master Thesis - CDSS for RPA</title>
   </head>
   <body>
 
@@ -37,23 +40,6 @@
     </script>
 
 
-
-
-    <div style="float:right">
-    <form align="right" name="form1" method="post" action="../logout.php" style="margin: 10px;">
-      <label class="logoutLblPos">
-      <input name="submit2" type="submit" id="submit2" value="Log ud" class="btn btn-default btn-sm">
-      </label>
-    </form>
-    </div>
-
-    <div style="float:right">
-    <form align="right" name="form2" method="post" style="margin: 10px;">
-      <label class="weightLblPos">
-        <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm">Se vægtning</button>
-      </label>
-    </form>
-    </div>
 
 
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
@@ -71,10 +57,96 @@
 
 
 
-    <div class="container">
-      <div class="card-deck mb-3 text-center">
-        <div class="card mb-4 box-shadow">
-          <div class="card-header">
+
+
+      <div class="container">
+  <div class="row">
+    <div class="col">          <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">Developer</h6>
+                </div>
+                <div class="card-body">
+                <li>Reusable Modules</li>
+              <li>Workload</li>
+              <li>Clicks and Interactions</li>
+              <br><br><br>
+
+              <div class="d-flex justify-content-center">
+<a>
+      <span class="text">You're not a Developer, so you don't have access</span>
+    </a>
+</div>
+
+
+                </div>
+                
+</div></div>
+    <div class="col">          <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">Leader</h6>
+                </div>
+                <div class="card-body">
+                <li>Legislation pressure</li>
+              <li>Internal Prioritization</li>
+              <li>Organisational Vision</li>
+              <br><br><br>
+
+<div class="d-flex justify-content-center">
+<a>
+      <span class="text">You're not a Leader, so you don't have access</span>
+    </a>
+</div>
+
+                </div>
+                </div></div>
+    <div class="w-100"></div>
+    <div class="col">          <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">Quality and Risk</h6>
+                </div>
+                <div class="card-body">
+                <li>Risk-evaluation</li>
+              <li>Documentation Quality</li>
+              <li>Customer Satisfaction</li>
+              <br><br><br>
+
+              <div class="d-flex justify-content-center">
+<a>
+      <span class="text">You're not a Quality and Risk employee, so you don't have access</span>
+    </a>
+</div>
+
+                </div>
+                </div></div>
+    <div class="col">          <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">Processconsultant</h6>
+                </div>
+                <div class="card-body">
+                <li>Process Maturity</li>
+              <li>Time Usage</li>
+              <li>Amount of Transactions</li>
+              <li>System complexity</li>
+              <li>System count</li>
+              <br>
+
+<div class="d-flex justify-content-center">
+<a href="process/select.php" class="btn btn-primary  text-center">
+      <span class="icon text-white">
+        <i class="fas fa-arrow-right"></i>
+      </span>
+      <span class="text">  Rate projects</span>
+    </a>
+</div>
+
+                </div>
+</div>
+  </div>
+</div>
+
+
+
+          <!--
             <h4 class="my-0 font-weight-normal">Developer</h4>
           </div>
           <div class="card-body">
@@ -147,7 +219,7 @@
 <hr/>
 <br/>
 
-
+  -->
         <div class="card">
 
           <div class="card-header">
@@ -166,81 +238,10 @@
 
     </div>
     <!-- Modal -->
-<div class="modal fade" id="myModal" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 <span class="glyphicon glyphicon-lock"></span></h4>
-      </div>
-      <div class="modal-body">
-        <form role="form">
-          <div class="form-group">
-
-            <b> Vægtning af udvikleren </b> <br/>
-            Datatilgængelighed:  <b><span id="Par1"></span>%</b><br/>
-            Genbrug af kode: <b><span id="Par2"></span>%</b><br/>
-            Byggeklodser: <b><span id="Par3"></span>%</b><br/>
-            Kompleksitet: <b><span id="Par4"></span>%</b>
-<hr/>
-            <b> Vægtning af proceskonsulent </b><br/>
-            Antal skærmbilleder <b><span id="Par5"></span>%</b><br/>
-            Antal berørte systemer <b><span id="Par6"></span>%</b><br/>
-            Kvalitet <b><span id="Par7"></span>%</b><br/>
-            Kundetilfredshed <b><span id="Par8"></span>%</b><br/>
-
-<hr/>
-            <b> Vægtning af leverancekoordinator </b><br/>
-            Risikovurdering <b><span id="Par9"></span>%</b><br/>
-            FTE Besparelser <b><span id="Par10"></span>%</b><br/>
-            Vision <b><span id="Par11"></span>%</b><br/>
-
-
-
-
-      </div>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-default btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Luk</button>
-      </div>
-    </div>
-  </div>
-</div>
 
 </div>
-<script>
 
-var Par1 = 0.25;
-var Par2 = 0.15;
-var Par3 = 0.20;
-var Par4 = 0.40;
-
-var Par5 = 0.20;
-var Par6 = 0.20;
-var Par7 = 0.10;
-var Par8 = 0.50;
-
-var Par9 = 0.25;
-var Par10 = 0.50;
-var Par11 = 0.25;
-
-
-$('#Par1').html(Par1 * 100);
-$('#Par2').html(Par2 * 100);
-$('#Par3').html(Par3 * 100);
-$('#Par4').html(Par4 * 100);
-$('#Par5').html(Par5 * 100);
-$('#Par6').html(Par6 * 100);
-$('#Par7').html(Par7 * 100);
-$('#Par8').html(Par8 * 100);
-$('#Par9').html(Par9 * 100);
-$('#Par10').html(Par10 * 100);
-$('#Par11').html(Par11 * 100);
-
-</script>
-
-
+<script src="js/sb-admin-2.min.js"></script>
 
   </body>
 </html>

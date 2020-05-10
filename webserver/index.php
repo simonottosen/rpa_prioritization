@@ -47,7 +47,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
-<title>SKAT - Beslutningsprocess</title>
+<title>Master Thesis - CDSS for RPA</title>
   </head>
 <body class="text-center">
 

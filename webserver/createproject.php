@@ -22,7 +22,7 @@
 
 
 
-<title>SKAT - Beslutningsprocess</title>
+<title>Master Thesis - CDSS for RPA</title>
   </head>
 <body class="text-center">
 

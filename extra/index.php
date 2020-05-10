@@ -18,7 +18,7 @@
     </script>
 <!--- Test -->
 
-<title>SKAT - Beslutningsprocess</title>
+<title>Master Thesis - CDSS for RPA</title>
   </head>
 <body class="text-center">
 <br/><br/><br/><br/><br/><br/>

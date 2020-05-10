@@ -84,7 +84,7 @@ while($row = $result->fetch_assoc()) {
 
 ?>
 
-<title>SKAT - Beslutningsprocess</title>
+<title>Master Thesis - CDSS for RPA</title>
   </head>
   <body>
 

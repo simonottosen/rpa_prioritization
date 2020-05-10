@@ -3,6 +3,7 @@
 ?>
 <html lang="en">
   <head>
+
     <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115740420-2"></script>
 <script>
@@ -12,18 +13,40 @@
 
   gtag('config', 'UA-115740420-2');
 </script>
-
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../style.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+
 <script>
 function myFunction() {
       window.location.reload(false);
 }
 </script>
+
+
+
+<script>
+  $( function() {
+    var handle = $( "#custom-handle" );
+    $( "#slider" ).slider({
+      create: function() {
+        handle.text( $( this ).slider( "value" ) );
+      },
+      slide: function( event, ui ) {
+        handle.text( ui.value );
+      }
+    });
+  } );
+  </script>
+
 
 <?php
 $servername = "127.0.0.1";
@@ -46,61 +69,152 @@ mysqli_set_charset($conn,"utf8");
 $sql = "SELECT * FROM projects where id = $databaseselection";
 $result = $conn->query($sql);
 
+
+$sql_weight = "SELECT * FROM weights";
+$result_weight = $conn->query($sql_weight);
+
+
+if ($result_weight->num_rows > 0) {
+  while($row = $result_weight->fetch_assoc()) {
+    $weight_reusablemodules = $row['reusablemodules'];
+    $weight_workload = $row['workload'];
+    $weight_processmaturity = $row['processmaturity'];
+    $weight_internalprioritization = $row['internalprioritization'];
+    $weight_riskevaluation = $row['riskevaluation'];
+    $weight_organizationalvision = $row['organizationalvision'];
+    $weight_systemcount = $row['systemcount'];
+    $weight_systemcomplexity = $row['systemcomplexity'];
+    $weight_documentationquality = $row['documentationquality'];
+    $weight_clicksandinteraction = $row['clicksandinteraction'];
+    $weight_legislationpressure = $row['legislationpressure'];
+    $weight_customersatisfaction = $row['customersatisfaction'];
+    $weight_timeusage = $row['timeusage'];
+    $weight_amountoftransactions = $row['amountoftransactions'];
+  }
+};
+
+
 while($row = $result->fetch_assoc()) {
-  $name = $row['name'];
   $id = $row['id'];
-  $desc = $row['descr'];
+  $name = $row['name'];
+  $descr = $row['descr'];
   $requestor = $row['requestor'];
-  $evaldesc = $row['evaldesc'];
-  $evalself= $row['evalself'];
-  $fagomr = $row['fagomr'];
-  $var1dev = $row['var1dev'];
-  $var2dev = $row['var2dev'];
-  $var3dev = $row['var3dev'];
-  $var4dev = $row['var4dev'];
-  $var1pro = $row['var1pro'];
-  $var2pro = $row['var2pro'];
-  $var3pro = $row['var3pro'];
-  $var4pro = $row['var4pro'];
-  $var1lev = $row['var1lev'];
-  $var2lev = $row['var2lev'];
-  $var3lev = $row['var3lev'];
-  $scoredev = $row['scoredev'];
-  $scorepro = $row['scorepro'];
-  $scorelev = $row['scorelev'];
-  $dok1 = $row['dok1'];
-  $dok2 = $row['dok2'];
-  $dok3 = $row['dok3'];
-  $dok4 = $row['dok4'];
-  $score = $row['score'];
+  $department = $row['department'];
+  $reusablemodules = $row['reusablemodules'];
+  $workload = $row['workload'];
+  $processmaturity = $row['processmaturity'];
+  $internalprioritization = $row['internalprioritization'];
+  $riskevaluation = $row['riskevaluation'];
+  $organizationalvision = $row['organizationalvision'];
+  $systemcount = $row['systemcount'];
+  $systemcomplexity = $row['systemcomplexity'];
+  $documentationquality = $row['documentationquality'];
+  $clicksandinteraction = $row['clicksandinteraction'];
+  $legislationpressure = $row['legislationpressure'];
+  $customersatisfaction = $row['customersatisfaction'];
+  $timeusage = $row['timeusage'];
+  $amountoftransactions = $row['amountoftransactions'];
+  $degreeofautomation = $row['degreeofautomation'];
+
   }
 
   $conn->close();
   $bFirstRun = false;
 }
 
+
+
+
+
+
+
+      # Leader
+      $weighted_legislationpressure = $legislationpressure * $weight_legislationpressure;
+      $weighted_internalprioritization = $internalprioritization * $weight_internalprioritization;
+      $weighted_organizationalvision = $organizationalvision * $weight_organizationalvision;
+
+      $leader_rating_sum = ($weighted_legislationpressure + $weighted_internalprioritization + $weighted_organizationalvision);
+      $leader_weight_sum = ($weight_legislationpressure + $weight_internalprioritization + $weight_organizationalvision);
+      $leader_sum = $leader_rating_sum / $leader_weight_sum;
+
+      # Quality
+      $weighted_riskevaluation = $riskevaluation * $weight_riskevaluation;
+      $weighted_documentationquality = $documentationquality * $weight_documentationquality;
+      $weighted_customersatisfaction = $customersatisfaction * $weight_customersatisfaction;
+      
+      $quality_rating_sum = ($weighted_riskevaluation + $weighted_documentationquality + $weighted_customersatisfaction);
+      $quality_weight_sum = ($weight_riskevaluation + $weight_documentationquality + $weight_customersatisfaction);
+      $quality_sum = $quality_rating_sum / $quality_weight_sum;
+
+
+      # Developer
+      $weigted_reusablemodules = $reusablemodules * $weight_reusablemodules;
+      $weigted_workload = $workload * $weight_workload;
+      $weighted_clicksandinteraction = $clicksandinteraction * $weight_clicksandinteraction;
+
+      $developer_rating_sum = ($weigted_reusablemodules + $weigted_workload + $weighted_clicksandinteraction);
+      $developer_weight_sum = ($weight_reusablemodules + $weight_workload + $weight_clicksandinteraction);
+      $developer_sum = $developer_rating_sum / $developer_weight_sum;
+
+      # Process
+      $weigted_processmaturity = $processmaturity * $weight_processmaturity;
+      $weighted_systemcount = $systemcount * $weight_systemcount;
+      $weighted_systemcomplexity = $systemcomplexity * $weight_systemcomplexity;
+      $weighted_timeusage = $timeusage * $weight_timeusage;
+      $weighted_amountoftransactions = $amountoftransactions * $weight_amountoftransactions;
+
+      $weight_combined_fte = $weight_timeusage + $weight_amountoftransactions;
+
+
+      $weighted_timeusage = $timeusage * $weight_timeusage;
+      $weighted_amountoftransactions = $amountoftransactions * $weight_amountoftransactions;
+      $weighted_degreeofautomation = $degreeofautomation;
+
+      $combined_fte = ($timeusage * $amountoftransactions) * (1-(1-($degreeofautomation/100)));
+      $MAX = 110100;
+      $relationship_fte = $combined_fte / $MAX;
+      $rating_fte = ($relationship_fte * 1000) / 100;
+      $weighted_rating_fte = $rating_fte * $weight_combined_fte;
+
+
+      $process_rating_sum = ($weigted_processmaturity + $weighted_systemcount + $weighted_systemcomplexity + $weighted_rating_fte);
+      $process_weight_sum = ($weight_processmaturity + $weight_systemcount + $weight_systemcomplexity + $weight_combined_fte);
+      $process_sum = $process_rating_sum / $process_weight_sum;
+
+
+
+      # Combined
+      $score = round(($process_rating_sum + $developer_rating_sum + $quality_rating_sum + $leader_rating_sum) / ($process_weight_sum + $developer_weight_sum + $quality_weight_sum + $leader_weight_sum), 2);
+      $printable_process_sum = round($process_sum, 2);
+      $printable_developer_sum = round($developer_sum, 2);
+      $printable_quality_sum = round($quality_sum, 2);
+      $printable_leader_sum = round($leader_sum, 2);
+
+
+
+
 ?>
 
-<title>SKAT - Beslutningsprocess</title>
+<title>CDSS for RPA</title>
   </head>
   <body>
 
-
-
     <div style="float:right">
-    <form align="right" name="form1" method="post" action="../logout.php" style="margin: 10px;">
+    <form align="right" name="form1" method="post" action="logout.php" style="margin: 10px;">
       <label class="logoutLblPos">
-      <input name="submit2" type="submit" id="submit2" value="Log ud" class="btn btn-default btn-sm">
+      <input name="submit2" type="submit" id="submit2" value="Log Out" class="btn btn-default btn-sm">
       </label>
     </form>
     </div>
     <div style="float:right">
     <form align="right" name="form2" method="post" style="margin: 10px;">
       <label class="weightLblPos">
-        <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm">Se vægtning</button>
+        <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm">See the weights</button>
       </label>
     </form>
     </div>
+
+
 
 
 
@@ -114,64 +228,104 @@ while($row = $result->fetch_assoc()) {
         <a href="../frontpage.php"> <img src="../logo.png" alt="Logo" style="height:75px;"> </a>
         <hr>
 
-        <h2> <?php echo $name ?> </h2>
-        <b> <?php echo $desc ?> </b>
+        <h2> <?php echo $name ?>  </h2>
+        <h5> Current score: <?php echo $score ?> <small>/10</small> </h5>
         <hr/>
-        <b>Projektet er blevet stillet af <?php echo $requestor ?> fra fagområdet ved navn <?php echo $fagomr ?>. <br/><br/>
-          De har givet deres egenvurdering karakteren <?php echo $evalself ?> med følgende begrundelse </b>
-          <p> "<?php echo $evaldesc ?>" </p>
-
-          <hr/>
-
-          <b>Stilleren har derudover svaret følgende til dokumentationen</b>
-          <p> Er der dokumentation af processen? <?php echo $dok1 ?> </p>
-          <p> Er dokumentationen opdateret til at reflektere den nuværende process helt? <?php echo $dok2 ?> </p>
-          <p> Er dokumentationen digital? <?php echo $dok3 ?> </p>
-          <p> Indeholder dokumentationen skærmbilleder af alle delprocesser? <?php echo $dok4 ?>  </p>
-          <hr/>
-
-
+        <p>The project have been proposed by <?php echo $requestor ?> from the department <?php echo $department ?>.</p> 
+          <p> Description: <br><i><?php echo $descr ?> </i></p>
 
 
       </div>
     </div>
+    </div>
+    </div>
+    </div>
 
+    
     <div class="container">
-      <div class="col-md-8 order-md-1">
-        <h4 class="mb-3">Vurdering fra processkonsulenten</h4>
-          </div>
-          <hr class="mb-4">
-          <form method = "post" action = "<?php $_PHP_SELF ?>">
-          <p>Skærmbilleder i brug</p>
-          <input name = "Scr1" id='Scr1' type="number" min="0" max="10" step="1" class="form-control formBlock" name="Scr1"  value="<?php echo $var1pro ?>" onkeyup="this.value = minmax(this.value, 0, 10)"style="width:200px;"/>
-          <hr/><p>Systemer der bliver interageret med</p>
-          <input name = "Scr2" id='Scr2' type="number" min="0" max="10" step="1" class="form-control formBlock" name="Scr2"  value="<?php echo $var2pro ?>" onkeyup="this.value = minmax(this.value, 0, 10)"style="width:200px;"/>
-          <hr/><p>Kvalitet af nuværende dokumentation af processen(PDD o.lign)</p>
-          <input name = "Scr3" id='Scr3' type="number" min="0" max="10" step="1" class="form-control formBlock" name="Scr3"  value="<?php echo $var3pro ?>" onkeyup="this.value = minmax(this.value, 0, 10)"style="width:200px;"/>
-          <hr/><p>Forbedring af Kundetilfredshed</p>
-          <input name = "Scr4" id='Scr4' type="number" min="0" max="10" step="1" class="form-control formBlock" name="Scr4"  value="<?php echo $var4pro ?>" onkeyup="this.value = minmax(this.value, 0, 10)"style="width:200px;"/>
+  <div class="row">
+    <div class="col">
+    
+    
+    
+    <div class="card" >
+  <div class="card-body">
+    <h3 class="card-title">Processconsultant</h3>
+    <h5> Weigted score: <?php echo "$printable_process_sum" ?> <small>/10</small> </h5>
 
-          <br/>
-      <button class="btn btn-success" name = "update" type = "submit" id = "update">Opdater værdierne</button>
+
+
+    <form method = "post" action = "<?php $_PHP_SELF ?>">
+
+    <div class="range-slider">
+    <label for="customRange1">Process Maturity</label><br>
+  <input class="custom-range range-slider__range" type="range" name="processmaturity" id="processmaturity" value="<?php echo $processmaturity ?>" min="0" max="10" >
+  <span class="range-slider__value">0</span>
+  </div>
+
+
+  <div class="range-slider">
+    <label for="customRange1">System complexity</label><br>
+  <input class="custom-range range-slider__range" type="range" name="systemcomplexity" id="systemcomplexity" value="<?php echo $systemcomplexity ?>" min="0" max="10" >
+  <span class="range-slider__value">0</span>
+  </div>
+
+
+  <div class="range-slider">
+    <label for="customRange1">System count</label><br>
+  <input class="custom-range range-slider__range" type="range" name="systemcount" id="systemcount" value="<?php echo $systemcount ?>" min="0" max="10" >
+  <span class="range-slider__value">0</span>
+  </div>
+
+  <div class="range-slider">
+    <label for="customRange1">Time Usage <i> in minutes </i></label> <br>
+    <input class="form-control" type="number" name="timeusage" id="timeusage" value="<?php echo $timeusage?>">
+  </div>
+
+
+  <div class="range-slider">
+    <label for="customRange1">Amount of Transactions <i> per month </i></label><br>
+    <input class="form-control" type="number" name="amountoftransactions" id="amountoftransactions" value="<?php echo $amountoftransactions?>">
+  </div>
+
+
+  <div class="range-slider">
+    <label for="customRange1">Degree of Automation <i> in percentage </i></label><br>
+  <input class="custom-range range-slider__range" type="range" name="degreeofautomation" id="degreeofautomation" value="<?php echo (int)$degreeofautomation ?>" min="0" max="100" >
+  <span class="range-slider__value">0</span> 
+  </div>
+
+<br>
+<hr>
+<br>
+
+  <button class="btn btn-success" name = "update" type = "submit" id = "update">Update the project</button>
         </form>
-      </p>
-      <hr/>
-      <h2>Resultat</h2>
-      <h2 class="card-title pricing-card-title"> <span id="UdrTot"></span><small class="text-muted">/ 10</small></h2>
-      <hr/>
-      <br/>
-    </div>
-    </div>
+
+  </div>
+</div>
+</div>
+</div>
+</div>
+
+    
+
+<?php echo $test ?>
+
+</ul>
 
 
 
-        <?php
-        if(isset($_POST['update'])) {
+      </form>
+
+
+        <?php        
+        if(isset($_POST["update"])){
         $servername = "127.0.0.1";
         $username = "root";
-        $password = "passwd";
-        $dbname = "skat";
-        $databaseselection = $_GET["id"];
+        $password = "thesis";
+        $dbname = "thesis";
+        $databaseselection = $id;
 
         // Create connection
         $conn = new mysqli($servername, $username, $password, $dbname);
@@ -179,151 +333,105 @@ while($row = $result->fetch_assoc()) {
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
-        $Scr1 = $_POST['Scr1'];
-        $Scr2 = $_POST['Scr2'];
-        $Scr3 = $_POST['Scr3'];
-        $Scr4 = $_POST['Scr4'];
-        $UdrTot = $_POST['UdrTot'];
-
-        $Par1 = 0.20;
-        $Par2 = 0.20;
-        $Par3 = 0.10;
-        $Par4 = 0.50;
-
-
-        $UdrTot = ($Scr1 * $Par1 + $Scr2 * $Par2 + $Scr3 * $Par3 + $Scr4 * $Par4);
-
-        $sql = "UPDATE projects ". "SET `var1pro` = $Scr1, `var2pro` = $Scr2, `var3pro` = $Scr3, `var4pro` = $Scr4, `scorepro` = $UdrTot,  `evaldev` = 1 ". "WHERE id = $databaseselection";
-        //$sql = "UPDATE projects ". "SET var8 = $Scr8 ". "WHERE id = $databaseselection";
+        $NEWprocessmaturity = $_POST['processmaturity'];
+        $NEWtimeusage= $_POST['timeusage'];
+        $NEWamountoftransactions = $_POST['amountoftransactions'];
+        $NEWsystemcomplexity = $_POST['systemcomplexity'];
+        $NEWsystemcount = $_POST['systemcount'];
+        $NEWdegreeofautomation = $_POST['degreeofautomation'];
+        
+        $sql = "UPDATE projects ". "SET `processmaturity` = $NEWprocessmaturity, `timeusage` = $NEWtimeusage, `amountoftransactions` = $NEWamountoftransactions, `systemcomplexity` = $NEWsystemcomplexity, `degreeofautomation` = $NEWdegreeofautomation, `systemcount` = $NEWsystemcount ". "WHERE id = $databaseselection";
 
         $result = $conn->query($sql);
 
 
         $conn->close();
         echo '<script type="text/javascript">',
-             'setTimeout(myFunction(), 3000);',
+             'setTimeout(myFunction(), 1000);',
              '</script>'
-        ;}
+        ;
+}
+
         ?>
 
+        <br><br>
+
+
+    <!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 <span class="glyphicon glyphicon-lock"></span></h4>
       </div>
+      <div class="modal-body">
+        <form role="form">
+          <div class="form-group">
 
-      <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
+            <b> Weights for the Developer </b> <br/>
+            Reusable Modules:  <b><?php echo $weight_reusablemodules ?></b><br/>
+            Workload:  <b><?php echo $weight_workload ?></b><br/>
+            Clicks and Interactions:  <b><?php echo $weight_clicksandinteraction ?></b><br/>
 
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 <span class="glyphicon glyphicon-lock"></span></h4>
-        </div>
-        <div class="modal-body">
-          <form role="form">
-            <div class="form-group">
+<hr/>
 
-              <b> Vægtning af udvikleren </b> <br/>
-              Datatilgængelighed:  <b><span id="Par1"></span>%</b><br/>
-              Genbrug af kode: <b><span id="Par2"></span>%</b><br/>
-              Byggeklodser: <b><span id="Par3"></span>%</b><br/>
-              Kompleksitet: <b><span id="Par4"></span>%</b>
-  <hr/>
-              <b> Vægtning af proceskonsulent </b><br/>
-              Antal skærmbilleder <b><span id="Par5"></span>%</b><br/>
-              Antal berørte systemer <b><span id="Par6"></span>%</b><br/>
-              Kvalitet <b><span id="Par7"></span>%</b><br/>
-              FTE Besparelser <b><span id="Par8"></span>%</b><br/>
+            <b> Weights for the Processconsultant </b><br/>
+            Process Maturity:  <b><?php echo $weight_processmaturity ?></b><br/>
+            Time Usage:  <b><?php echo $weight_timeusage ?></b><br/>
+            Amount of Transactions:  <b><?php echo $weight_amountoftransactions ?></b><br/>
+            System complexity:  <b><?php echo $weight_systemcomplexity ?></b><br/>
+            System count:  <b><?php echo $weight_systemcount ?></b><br/>
 
-  <hr/>
-              <b> Vægtning af leverancekoordinator </b><br/>
-              Risikovurdering <b><span id="Par9"></span>%</b><br/>
-              Kundetilfredshed <b><span id="Par10"></span>%</b><br/>
-              Vision <b><span id="Par11"></span>%</b><br/>
+<hr/>
+
+            <b> Weights for the Leader </b><br/>
+            Legislation Pressure:  <b><?php echo $weight_legislationpressure ?></b><br/>
+            Internal Prioritization:  <b><?php echo $weight_internalprioritization ?></b><br/>
+            Organisational Vision:  <b><?php echo $weight_organizationalvision ?></b><br/>
+
+            <hr/>
 
 
+            <b> Weights for Quality and Risk </b><br/>
+            Risk-evaluation:  <b><?php echo $weight_riskevaluation ?></b><br/>
+            Documentation Quality:  <b><?php echo $weight_documentationquality ?></b><br/>
+            Customer Satisfaction:  <b><?php echo $weight_customersatisfaction ?></b><br/>
 
 
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-default btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Luk</button>
-        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-default btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Luk</button>
       </div>
     </div>
   </div>
-  <script>
+</div>
 
-  var Par1 = 0.25;
-  var Par2 = 0.15;
-  var Par3 = 0.20;
-  var Par4 = 0.40;
-
-  var Par5 = 0.20;
-  var Par6 = 0.20;
-  var Par7 = 0.10;
-  var Par8 = 0.50;
-
-  var Par9 = 0.25;
-  var Par10 = 0.50;
-  var Par11 = 0.25;
-
-  
-  $('#Par1').html(Par1 * 100);
-  $('#Par2').html(Par2 * 100);
-  $('#Par3').html(Par3 * 100);
-  $('#Par4').html(Par4 * 100);
-  $('#Par5').html(Par5 * 100);
-  $('#Par6').html(Par6 * 100);
-  $('#Par7').html(Par7 * 100);
-  $('#Par8').html(Par8 * 100);
-  $('#Par9').html(Par9 * 100);
-  $('#Par10').html(Par10 * 100);
-  $('#Par11').html(Par11 * 100);
-
-
-    </script>
-
-    <script>
-    function minmax(value, min, max)
-    {
-        if(parseInt(value) < min || isNaN(parseInt(value)))
-            return 0;
-        else if(parseInt(value) > max)
-            return 10;
-        else return value;
-    }
-
-
-    //Her definerer vi de variabler som skal bruges til udregningen og ikke bør ændres på
-    $('input').keyup(function(){
-
-    var Scr1 = Number($('#Scr1').val());
-    var Scr2 = Number($('#Scr2').val());
-    var Scr3 = Number($('#Scr3').val());
-    var Scr4 = Number($('#Scr4').val());
-
-
-    var Udr1 = Par1 * Scr1
-    var Udr2 = Par2 * Scr2
-    var Udr3 = Par3 * Scr3
-    var Udr4 = Par4 * Scr4
-
-    var UdrTot = (Udr1 + Udr2 + Udr3 + Udr4)
-
-
-      //Dette er vores inputs som er taget fra de inputs der kan indtasts på siden. De bliver så defineret som variabler vi kan bruge i logikken senere i koden
-      var UdrTot = UdrTot.toFixed(1)
-
-
-
-      $('#UdrTot').html(UdrTot);
-      $('#select').html(select);
-
-
-    })
-    window.onload = function() {
-    $('input').keyup()
-    };
-
-    </script>
   </body>
 </html>
+
+
+<script>
+var rangeSlider = function(){
+  var slider = $('.range-slider'),
+      range = $('.range-slider__range'),
+      value = $('.range-slider__value');
+    
+  slider.each(function(){
+
+    value.each(function(){
+      var value = $(this).prev().attr('value');
+      $(this).html(value);
+    });
+
+    range.on('input', function(){
+      $(this).next(value).html(this.value);
+    });
+  });
+};
+
+rangeSlider();
+    </script>

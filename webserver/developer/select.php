@@ -45,7 +45,7 @@ $result_weight = $conn->query($sql_weight);
 
 ?>
 
-<title>SKAT - Beslutningsprocess</title>
+<title>Master Thesis - CDSS for RPA</title>
   </head>
   <body>
 

@@ -1,8 +1,10 @@
 <?php
+header('Content-type: text/html; charset=utf-8');
    include('../session.php');
 ?>
 <html lang="en">
   <head>
+
     <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115740420-2"></script>
 <script>
@@ -19,6 +21,13 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/locale/bootstrap-table-zh-CN.min.js"></script>
+<link href="../css/sb-admin-2.min.css" rel="stylesheet">
+<link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+<link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
 <?php
 $servername = "127.0.0.1";
@@ -27,6 +36,7 @@ $password = "thesis";
 $dbname = "thesis";
 
 // Create connection
+
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
 if ($conn->connect_error) {
@@ -42,14 +52,14 @@ $result_weight = $conn->query($sql_weight);
 
 ?>
 
-<title>SKAT - Beslutningsprocess</title>
+<title>Master Thesis - CDSS for RPA</title>
   </head>
   <body>
 
     <div style="float:right">
-    <form align="right" name="form1" method="post" action="../logout.php" style="margin: 10px;">
+    <form align="right" name="form1" method="post" action="logout.php" style="margin: 10px;">
       <label class="logoutLblPos">
-      <input name="submit2" type="submit" id="submit2" value="Log ud" class="btn btn-default btn-sm">
+      <input name="submit2" type="submit" id="submit2" value="Log out" class="btn btn-default btn-sm">
       </label>
     </form>
     </div>
@@ -64,32 +74,36 @@ $result_weight = $conn->query($sql_weight);
         <a href="../frontpage.php"> <img src="../logo.png" alt="Logo" style="height:75px;"> </a>
         <hr>
 
-        <h4>Vælg det projekt i listen, som du ønsker at redigere</h4>
+        <h4>Choose the project that you would like to rate.</h4>
         <br>
 
 
 
-<form action="edit.php" method="get">
-<input type="text" name="id" class="form-control formBlock" placeholder="Indtast et ID" style="width:300px;"><br/>
-<input type="submit" type="button" class="btn btn-success" id="button" disabled=true value="Rediger projekt" style="width:150px;">
-</form>
 
+<div class="card mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary"></h6>
+            </div>
+            <div class="card-body">
 
-
-<table class="table table-striped table-bordered">
-  <br/>
-  <hr/>
-
-    <tr>
-    <th>ID</th>
+<div class="table-responsive">
+  <table class="table table-bordered" id="datatables" width="100%" cellspacing="0">
+    <thead>
+      <th> </th>
+      <th> </th>
+      <th data-field="id"  data-sortable="true">ID</th>
       <th>Name</th>
-      <th>Description</th>
-      <th>Process score</th>
+      <th>Department</th>
+      <th data-field="Processconsultant"  data-sortable="true">Processconsultant score</th>
 
 
     </tr>
+  </thead>
 
-    <?php
+<?php
+
+
+
 if ($result_weight->num_rows > 0) {
   while($row = $result_weight->fetch_assoc()) {
     $weight_reusablemodules = $row['reusablemodules'];
@@ -133,7 +147,7 @@ if ($result->num_rows > 0) {
       $amountoftransactions = $row['amountoftransactions'];
       $degreeofautomation = $row['degreeofautomation'];
 
-
+      
 
       # Leader
       $weighted_legislationpressure = $legislationpressure * $weight_legislationpressure;
@@ -170,16 +184,41 @@ if ($result->num_rows > 0) {
       $weighted_timeusage = $timeusage * $weight_timeusage;
       $weighted_amountoftransactions = $amountoftransactions * $weight_amountoftransactions;
 
-      $process_rating_sum = ($weigted_processmaturity + $weighted_systemcount + $weighted_systemcomplexity + $weighted_timeusage + $weighted_amountoftransactions);
-      $process_weight_sum = ($weight_processmaturity + $weight_systemcount + $weight_systemcomplexity + $weight_timeusage + $weight_amountoftransactions);
+      $weight_combined_fte = $weight_timeusage + $weight_amountoftransactions;
+
+
+      $weighted_timeusage = $timeusage * $weight_timeusage;
+      $weighted_amountoftransactions = $amountoftransactions * $weight_amountoftransactions;
+      $weighted_degreeofautomation = $degreeofautomation;
+
+      $combined_fte = ($timeusage * $amountoftransactions) * (1-(1-($degreeofautomation/100)));
+      $MAX = 110100;
+      $relationship_fte = $combined_fte / $MAX;
+      $rating_fte = ($relationship_fte * 1000) / 100;
+      $weighted_rating_fte = $rating_fte * $weight_combined_fte;
+
+
+      $process_rating_sum = ($weigted_processmaturity + $weighted_systemcount + $weighted_systemcomplexity + $weighted_rating_fte);
+      $process_weight_sum = ($weight_processmaturity + $weight_systemcount + $weight_systemcomplexity + $weight_combined_fte);
       $process_sum = $process_rating_sum / $process_weight_sum;
+
+
+      # Combined
+      $score = round(($process_rating_sum + $developer_rating_sum + $quality_rating_sum + $leader_rating_sum) / ($process_weight_sum + $developer_weight_sum + $quality_weight_sum + $leader_weight_sum), 2);
+      $url = '<a href="edit.php?id=';
+      $string_id = strval($id);
+      $url .= $string_id;
+      $url .='"class="btn btn-info" role="button">Expand</a>';
+
 
 
 
   echo '<tr>
-      <td>'.$row['id'].'</td>
-      <td>'.$row['name'].'</td>
-      <td>'.$row['descr'].'</td>
+      <td></td>
+      <td>'.$url.'</td>
+      <td>'.$id.'</td>
+      <td>'.$name.'</td>
+      <td>'.$department.'</td>
       <td>'.round($process_sum, 2).'</td>
     </tr>';
 }
@@ -197,5 +236,53 @@ $('input').keyup(function(){
 
 });
 </script>
+
+
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin-2.min.js"></script>
+
+  <!-- Page level plugins -->
+
+<script>
+
+$(document).ready(function() {
+    $('#datatables').DataTable( {
+        responsive: {
+            details: {
+                type: 'column'
+            }
+        },
+        columnDefs: [ {
+            className: 'control',
+            orderable: false,
+            targets:   0
+        } ],
+        order: [ 5, 'desc' ]
+    } );
+} );
+
+
+</script>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+  <script src="../vendor/datatables/dataTables.bootstrap4.min.js"></script>
+  <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+
+  
+
+  <!-- Page level custom scripts -->
+  <script src="../js/demo/datatables-demo.js"></script>
+
   </body>
 </html>
+
+
+<!--
+-->
