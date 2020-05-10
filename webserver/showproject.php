@@ -175,8 +175,22 @@ while($row = $result->fetch_assoc()) {
       $weighted_timeusage = $timeusage * $weight_timeusage;
       $weighted_amountoftransactions = $amountoftransactions * $weight_amountoftransactions;
 
-      $process_rating_sum = ($weigted_processmaturity + $weighted_systemcount + $weighted_systemcomplexity + $weighted_timeusage + $weighted_amountoftransactions);
-      $process_weight_sum = ($weight_processmaturity + $weight_systemcount + $weight_systemcomplexity + $weight_timeusage + $weight_amountoftransactions);
+      $weight_combined_fte = $weight_timeusage + $weight_amountoftransactions;
+
+
+      $weighted_timeusage = $timeusage * $weight_timeusage;
+      $weighted_amountoftransactions = $amountoftransactions * $weight_amountoftransactions;
+      $weighted_degreeofautomation = $degreeofautomation;
+
+      $combined_fte = ($timeusage * $amountoftransactions) * (1-(1-($degreeofautomation/100)));
+      $MAX = 110100;
+      $relationship_fte = $combined_fte / $MAX;
+      $rating_fte = ($relationship_fte * 1000) / 100;
+      $weighted_rating_fte = $rating_fte * $weight_combined_fte;
+
+
+      $process_rating_sum = ($weigted_processmaturity + $weighted_systemcount + $weighted_systemcomplexity + $weighted_rating_fte);
+      $process_weight_sum = ($weight_processmaturity + $weight_systemcount + $weight_systemcomplexity + $weight_combined_fte);
       $process_sum = $process_rating_sum / $process_weight_sum;
 
 
@@ -358,22 +372,7 @@ while($row = $result->fetch_assoc()) {
     <label for="customRange1">Process Maturity</label><br>
   <input class="custom-range range-slider__range" type="range" value="<?php echo $processmaturity ?>" min="0" max="10" disabled="true">
   <span class="range-slider__value">0</span>
-  </div>
-
-
-  <div class="range-slider">
-    <label for="customRange1">Time Usage</label> <br>
-  <input class="custom-range range-slider__range" type="range" value="<?php echo $timeusage ?>" min="0" max="10" disabled="true">
-  <span class="range-slider__value">0</span>
-  </div>
-
-
-  <div class="range-slider">
-    <label for="customRange1">Amount of Transactions</label><br>
-  <input class="custom-range range-slider__range" type="range" value="<?php echo $amountoftransactions ?>" min="0" max="10" disabled="true">
-  <span class="range-slider__value">0</span>
-  </div>
-  
+  </div>  
 
   <div class="range-slider">
     <label for="customRange1">System complexity</label><br>
@@ -387,6 +386,26 @@ while($row = $result->fetch_assoc()) {
   <input class="custom-range range-slider__range" type="range" value="<?php echo $systemcount ?>" min="0" max="10" disabled="true">
   <span class="range-slider__value">0</span>
   </div>
+
+
+  <div class="range-slider">
+    <label for="customRange1">Time Usage <i> in minutes </i></label> <br>
+    <input class="form-control" type="number" name="timeusage" id="timeusage" value="<?php echo $timeusage?>">
+  </div>
+
+
+  <div class="range-slider">
+    <label for="customRange1">Amount of Transactions <i> per month </i></label><br>
+    <input class="form-control" type="number" name="amountoftransactions" id="amountoftransactions" value="<?php echo $amountoftransactions?>">
+  </div>
+
+
+  <div class="range-slider">
+    <label for="customRange1">Degree of Automation <i> in percentage </i></label><br>
+  <input class="custom-range range-slider__range" type="range" name="degreeofautomation" id="degreeofautomation" value="<?php echo (int)$degreeofautomation ?>" min="0" max="100" >
+  <span class="range-slider__value">0</span> 
+  </div>
+
 
 
 
