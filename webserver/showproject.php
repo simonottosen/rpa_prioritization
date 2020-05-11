@@ -61,7 +61,7 @@ slider.oninput = function() {
 
 
 <?php
-$servername = "127.0.0.1";
+$servername = "mysql";
 $username = "root";
 $password = "thesis";
 $dbname = "thesis";
@@ -425,47 +425,6 @@ while($row = $result->fetch_assoc()) {
 
       </form>
 
-
-        <?php
-        if(isset($_POST['update'])) {
-        $servername = "127.0.0.1";
-        $username = "root";
-        $password = "passwd";
-        $dbname = "skat";
-        $databaseselection = $_GET["id"];
-
-        // Create connection
-        $conn = new mysqli($servername, $username, $password, $dbname);
-        // Check connection
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
-        $Scr1 = $_POST['Scr1'];
-        $Scr2 = $_POST['Scr2'];
-        $Scr3 = $_POST['Scr3'];
-        $Scr4 = $_POST['Scr4'];
-        $Scr5 = $_POST['Scr5'];
-        $Scr6 = $_POST['Scr6'];
-        $Scr7 = $_POST['Scr7'];
-        $Scr8 = $_POST['Scr8'];
-        $Scr9 = $_POST['Scr9'];
-
-
-        $sql = "UPDATE projects ". "SET `var1` = $Scr1, `var2` = $Scr2, `var3` = $Scr3, `var4` = $Scr4, `var5` = $Scr5, `var6` = $Scr6, `var7` = $Scr7, `var8` = $Scr8, `var9` = $Scr9, `evaldev` = 1, `evalpro` = 1, `evallev` = 1, `evaladm` = 1 ". "WHERE id = $databaseselection";
-        //$sql = "UPDATE projects ". "SET var8 = $Scr8 ". "WHERE id = $databaseselection";
-
-        $result = $conn->query($sql);
-
-
-        $conn->close();
-        echo '<script type="text/javascript">',
-             'setTimeout(myFunction(), 1000);',
-             '</script>'
-        ;
-
-}
-
-        ?>
 
         <br><br>
 

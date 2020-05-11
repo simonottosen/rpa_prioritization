@@ -49,7 +49,7 @@ function myFunction() {
 
 
 <?php
-$servername = "127.0.0.1";
+$servername = "mysql";
 $username = "root";
 $password = "thesis";
 $dbname = "thesis";
@@ -321,7 +321,7 @@ while($row = $result->fetch_assoc()) {
 
         <?php        
         if(isset($_POST["update"])){
-        $servername = "127.0.0.1";
+        $servername = "mysql";
         $username = "root";
         $password = "thesis";
         $dbname = "thesis";
