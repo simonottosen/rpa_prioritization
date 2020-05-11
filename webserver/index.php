@@ -17,11 +17,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
       header("location: frontpage.php");
 		}
 		else{
-      $error = "Dit brugernavn eller password er ikke korrekt";
+      $error = "Username og password not correct. Try test;test";
 		}
 	}
 	else{
-    $error = "Din bruger kunne ikke findes";
+    $error = "The user could nout be found. Try test;test";
 	}
 }
 ?>
@@ -56,11 +56,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     <a href="index.php"> <img src="logo.png" alt="Logo" style="height:63px;"> </a> <br/><br/><br/>
   	<input type="text" name="myusername" value="" placeholder="Username" class = "form-control">
   	<input type="password" name="mypassword" value="" placeholder="Password" class = "form-control">
-  	<button type="submit" name="submit" class="btn btn-lg btn-primary btn-block">Log ind</button>
+  	<button type="submit" name="submit" class="btn btn-lg btn-primary btn-block">Log in</button>
     <div style = "font-size:11px; color:#cc0000; margin-top:10px"><?php echo $error; ?></div>
     <br />
 
-    <a href="createproject.php" style="text-decoration:none;"> <type="button" class="btn btn-sm btn-block btn-outline-primary">Tilføj et nyt projekt</a>
 
   </form>
 
