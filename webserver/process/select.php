@@ -57,11 +57,6 @@ $result_weight = $conn->query($sql_weight);
   <body>
 
     <div style="float:right">
-    <form align="right" name="form1" method="post" action="logout.php" style="margin: 10px;">
-      <label class="logoutLblPos">
-      <input name="submit2" type="submit" id="submit2" value="Log out" class="btn btn-default btn-sm">
-      </label>
-    </form>
     </div>
 
 
@@ -71,7 +66,7 @@ $result_weight = $conn->query($sql_weight);
       <div class="container">
         <br/>
 
-        <a href="../frontpage.php"> <img src="../logo.png" alt="Logo" style="height:75px;"> </a>
+        <a href="../index.php"> <img src="../logo.png" alt="Logo" style="height:75px;"> </a>
         <hr>
 
         <h4>Choose the project that you would like to rate.</h4>

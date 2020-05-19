@@ -114,7 +114,7 @@ while($row = $result->fetch_assoc()) {
       <div class="container">
         <br/>
 
-        <a href="../frontpage.php"> <img src="../skat-logo.png" alt="SKAT" style="height:75px;"> </a>
+        <a href="../index.php"> <img src="../skat-logo.png" alt="SKAT" style="height:75px;"> </a>
         <hr>
 
         <h2> <?php echo $name ?> </h2>

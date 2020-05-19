@@ -211,11 +211,6 @@ while($row = $result->fetch_assoc()) {
   <body>
 
     <div style="float:right">
-    <form align="right" name="form1" method="post" action="logout.php" style="margin: 10px;">
-      <label class="logoutLblPos">
-      <input name="submit2" type="submit" id="submit2" value="Log Out" class="btn btn-default btn-sm">
-      </label>
-    </form>
     </div>
     <div style="float:right">
     <form align="right" name="form2" method="post" style="margin: 10px;">
@@ -236,7 +231,7 @@ while($row = $result->fetch_assoc()) {
       <div class="container">
         <br/>
 
-        <a href="frontpage.php"> <img src="logo.png" alt="Logo" style="height:75px;"> </a>
+        <a href="index.php"> <img src="logo.png" alt="Logo" style="height:75px;"> </a>
         <hr>
 
         <h2> <?php echo $name ?>  </h2>
