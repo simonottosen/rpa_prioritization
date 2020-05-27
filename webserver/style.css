@@ -1,4 +1,6 @@
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: border-box;
 }
 body {
@@ -8,7 +10,7 @@ body {
 @media (min-width: 600px) {
   body {
     padding: 60px;
- }
+  }
 }
 .range-slider {
   margin: 60px 0 0 0%;
@@ -80,12 +82,13 @@ body {
   border-top: 7px solid transparent;
   border-right: 7px solid #2c3e50;
   border-bottom: 7px solid transparent;
-  content: '';
+  content: "";
 }
 ::-moz-range-track {
   background: #d7dcdf;
   border: 0;
 }
-input::-moz-focus-inner, input::-moz-focus-outer {
+input::-moz-focus-inner,
+input::-moz-focus-outer {
   border: 0;
 }
